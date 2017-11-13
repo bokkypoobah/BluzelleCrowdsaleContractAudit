@@ -14,6 +14,28 @@ This audit has been conducted on Bluzelle's source code in commits
 
 TODO: Check - No potential vulnerabilities have been identified in the crowdsale and token contract.
 
+<br />
+
+### Mainnet Contract Details
+
+`TBA`
+
+<br />
+
+### Crowdsale Contract
+
+<br />
+
+### Token Contract
+
+The token contract is compliant with the recently finalised [ERC20 Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md),
+with the following notable features:
+
+* `transfer(...)` and `transferFrom(...)` will `REVERT` if there is insufficient balance (or approved amount)
+* 0 value `transfer(...)` and `transferFrom(...)` are valid transfers
+* `approve(...)` does not require a non-0 allowance to be set to 0 before being set to a different non-0 amount
+
+<br />
 
 ## Table Of Contents
 
@@ -100,36 +122,43 @@ TODO
 
 ## Code Review
 
+* [x] [code-review/Math.md](code-review/Math.md)
+  * [x] library Math
 * [x] [code-review/Owned.md](code-review/Owned.md)
   * [x] contract Owned
 * [x] [code-review/OpsManaged.md](code-review/OpsManaged.md)
   * [x] contract OpsManaged is Owned
+* [x] [code-review/ERC20Interface.md](code-review/ERC20Interface.md)
+  * [x] contract ERC20Interface
+* [x] [code-review/ERC20Token.md](code-review/ERC20Token.md)
+  * [x] contract ERC20Token is ERC20Interface
+* [x] [code-review/Finalizable.md](code-review/Finalizable.md)
+  * [x] contract Finalizable is Owned
+* [x] [code-review/FinalizableToken.md](code-review/FinalizableToken.md)
+  * [x] contract FinalizableToken is ERC20Token, OpsManaged, Finalizable
+* [x] [code-review/BluzelleTokenConfig.md](code-review/BluzelleTokenConfig.md)
+  * [x] contract BluzelleTokenConfig
 * [ ] [code-review/BluzelleToken.md](code-review/BluzelleToken.md)
   * [ ] contract BluzelleToken is FinalizableToken, BluzelleTokenConfig
-* [ ] [code-review/BluzelleTokenConfig.md](code-review/BluzelleTokenConfig.md)
-  * [ ] contract BluzelleTokenConfig
 * [ ] [code-review/BluzelleTokenSale.md](code-review/BluzelleTokenSale.md)
   * [ ] contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig
 * [ ] [code-review/BluzelleTokenSaleConfig.md](code-review/BluzelleTokenSaleConfig.md)
   * [ ] contract BluzelleTokenSaleConfig is BluzelleTokenConfig
-* [ ] [code-review/BluzelleTokenSaleMock.md](code-review/BluzelleTokenSaleMock.md)
-  * [ ] contract BluzelleTokenSaleMock is BluzelleTokenSale
-* [ ] [code-review/ERC20Interface.md](code-review/ERC20Interface.md)
-  * [ ] contract ERC20Interface
-* [ ] [code-review/ERC20Token.md](code-review/ERC20Token.md)
-  * [ ] contract ERC20Token is ERC20Interface
-* [ ] [code-review/Finalizable.md](code-review/Finalizable.md)
-  * [ ] contract Finalizable is Owned
-* [ ] [code-review/FinalizableToken.md](code-review/FinalizableToken.md)
-  * [ ] contract FinalizableToken is ERC20Token, OpsManaged, Finalizable
 * [ ] [code-review/FlexibleTokenSale.md](code-review/FlexibleTokenSale.md)
   * [ ] contract FlexibleTokenSale is Finalizable, OpsManaged
-* [ ] [code-review/FlexibleTokenSaleMock.md](code-review/FlexibleTokenSaleMock.md)
-  * [ ] contract FlexibleTokenSaleMock is FlexibleTokenSale
-* [ ] [code-review/Math.md](code-review/Math.md)
-  * [ ] library Math
-* [ ] [code-review/MathTest.md](code-review/MathTest.md)
+
+<br />
+
+### Not Reviewed
+
+The following was not review as it is only used for testing:
+
+* [ ] [../contracts/MathTest.sol](../contracts/MathTest.sol)
   * [ ] contract MathTest
+* [ ] [../contracts/BluzelleTokenSaleMock.md](../contracts/BluzelleTokenSaleMock.md)
+  * [ ] contract BluzelleTokenSaleMock is BluzelleTokenSale
+* [ ] [../contracts/FlexibleTokenSaleMock.md](../contracts/FlexibleTokenSaleMock.md)
+  * [ ] contract FlexibleTokenSaleMock is FlexibleTokenSale
 
 <br />
 
