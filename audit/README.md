@@ -138,14 +138,14 @@ TODO
   * [x] contract FinalizableToken is ERC20Token, OpsManaged, Finalizable
 * [x] [code-review/BluzelleTokenConfig.md](code-review/BluzelleTokenConfig.md)
   * [x] contract BluzelleTokenConfig
-* [ ] [code-review/BluzelleToken.md](code-review/BluzelleToken.md)
-  * [ ] contract BluzelleToken is FinalizableToken, BluzelleTokenConfig
-* [ ] [code-review/BluzelleTokenSale.md](code-review/BluzelleTokenSale.md)
-  * [ ] contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig
-* [ ] [code-review/BluzelleTokenSaleConfig.md](code-review/BluzelleTokenSaleConfig.md)
-  * [ ] contract BluzelleTokenSaleConfig is BluzelleTokenConfig
+* [x] [code-review/BluzelleToken.md](code-review/BluzelleToken.md)
+  * [x] contract BluzelleToken is FinalizableToken, BluzelleTokenConfig
+* [x] [code-review/BluzelleTokenSaleConfig.md](code-review/BluzelleTokenSaleConfig.md)
+  * [x] contract BluzelleTokenSaleConfig is BluzelleTokenConfig
 * [ ] [code-review/FlexibleTokenSale.md](code-review/FlexibleTokenSale.md)
   * [ ] contract FlexibleTokenSale is Finalizable, OpsManaged
+* [ ] [code-review/BluzelleTokenSale.md](code-review/BluzelleTokenSale.md)
+  * [ ] contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig
 
 <br />
 

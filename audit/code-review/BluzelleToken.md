@@ -7,6 +7,7 @@ Source file [../../contracts/BluzelleToken.sol](../../contracts/BluzelleToken.so
 <hr />
 
 ```javascript
+// BK Ok
 pragma solidity ^0.4.17;
 
 // ----------------------------------------------------------------------------
@@ -18,6 +19,7 @@ pragma solidity ^0.4.17;
 // The MIT Licence.
 // ----------------------------------------------------------------------------
 
+// BK Next 2 Ok
 import "./FinalizableToken.sol";
 import "./BluzelleTokenConfig.sol";
 
@@ -34,8 +36,10 @@ import "./BluzelleTokenConfig.sol";
 // In addition to owner, there is a ops role which is used during the sale,
 // by the sale contract, in order to transfer tokens.
 // ----------------------------------------------------------------------------
+// BK Ok
 contract BluzelleToken is FinalizableToken, BluzelleTokenConfig {
 
+   // BK Ok - Constructor
    function BluzelleToken() public
       FinalizableToken(TOKEN_NAME, TOKEN_SYMBOL, TOKEN_DECIMALS, TOKEN_TOTALSUPPLY)
    {

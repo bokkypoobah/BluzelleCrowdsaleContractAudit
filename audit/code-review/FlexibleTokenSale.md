@@ -7,6 +7,7 @@ Source file [../../contracts/FlexibleTokenSale.sol](../../contracts/FlexibleToke
 <hr />
 
 ```javascript
+// BK Ok
 pragma solidity ^0.4.17;
 
 // ----------------------------------------------------------------------------
@@ -17,19 +18,23 @@ pragma solidity ^0.4.17;
 // http://www.enuma.io/
 // ----------------------------------------------------------------------------
 
+// BK Next 4 Ok
 import "./FinalizableToken.sol";
 import "./Finalizable.sol";
 import "./OpsManaged.sol";
 import "./Math.sol";
 
 
+// BK Ok
 contract FlexibleTokenSale is Finalizable, OpsManaged {
 
+   // BK Ok
    using Math for uint256;
 
    //
    // Lifecycle
    //
+   // BK Next 3 Ok
    uint256 public startTime;
    uint256 public endTime;
    bool public suspended;
@@ -37,6 +42,7 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
    //
    // Pricing
    //
+   // BK Next 5 Ok
    uint256 public tokensPerKEther;
    uint256 public bonus;
    uint256 public maxTokensPerAccount;
@@ -46,16 +52,19 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
    //
    // Wallets
    //
+   // BK Ok
    address public walletAddress;
 
    //
    // Token
    //
+   // BK Ok
    FinalizableToken public token;
 
    //
    // Counters
    //
+   // BK Next 2 Ok
    uint256 public totalTokensSold;
    uint256 public totalEtherCollected;
 
@@ -63,6 +72,7 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
    //
    // Events
    //
+   // BK Next 10 Ok
    event Initialized();
    event TokensPerKEtherUpdated(uint256 _newValue);
    event MaxTokensPerAccountUpdated(uint256 _newMax);
@@ -75,59 +85,81 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
    event TokensReclaimed(uint256 _amount);
 
 
+   // BK Ok - Constructor
    function FlexibleTokenSale(uint256 _startTime, uint256 _endTime, address _walletAddress) public
       OpsManaged()
    {
+      // BK Ok
       require(_endTime > _startTime);
 
+      // BK Next 2 Ok
       require(_walletAddress != address(0));
       require(_walletAddress != address(this));
 
+      // BK Ok
       walletAddress = _walletAddress;
 
+      // BK Next 2 Ok
       finalized = false;
       suspended = false;
 
+      // BK Next 2 Ok
       startTime = _startTime;
       endTime   = _endTime;
 
       // Use some defaults config values. Classes deriving from FlexibleTokenSale
       // should set their own defaults
+      // BK Next 2 Ok
       tokensPerKEther     = 100000;
       bonus               = 10000;
+      // BK NOTE - 0 mean no max
+      // BK Ok
       maxTokensPerAccount = 0;
+      // BK Ok
       contributionMin     = 0.1 ether;
 
+      // BK Next 2 Ok
       totalTokensSold     = 0;
       totalEtherCollected = 0;
    }
 
 
+   // BK Ok - Constant function
    function currentTime() public constant returns (uint256) {
+      // BK Ok
       return now;
    }
 
 
    // Initialize should be called by the owner as part of the deployment + setup phase.
    // It will associate the sale contract with the token contract and perform basic checks.
+   // BK Ok - Only owner can execute
    function initialize(FinalizableToken _token) external onlyOwner returns(bool) {
+      // BK Ok
       require(address(token) == address(0));
+      // BK Next 3 Ok
       require(address(_token) != address(0));
       require(address(_token) != address(this));
       require(address(_token) != address(walletAddress));
+      // BK Ok
       require(isOwnerOrOps(address(_token)) == false);
 
+      // BK Ok
       token = _token;
 
       // This factor is used when converting cost <-> tokens.
       // 18 is because of the ETH -> Wei conversion.
       // 3 because prices are in K ETH instead of just ETH.
       // 2 because bonuses are expressed as 10000 for no bonus, 12500 for 25%, etc.
+      // BK Ok
       tokenConversionFactor = 10**(uint256(18).sub(_token.decimals()).add(3).add(4));
+      // BK Ok
       require(tokenConversionFactor > 0);
 
+      // BK Ok - Log event
       Initialized();
 
+      // BK Ok
       return true;
    }
 
@@ -138,41 +170,56 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
 
    // Allows the owner to change the wallet address which is used for collecting
    // ether received during the token sale.
+   // BK Ok - Only owner can execute
    function setWalletAddress(address _walletAddress) external onlyOwner returns(bool) {
+      // BK Next 3 Ok
       require(_walletAddress != address(0));
       require(_walletAddress != address(this));
       require(_walletAddress != address(token));
+      // BK Ok
       require(isOwnerOrOps(_walletAddress) == false);
 
+      // BK Ok
       walletAddress = _walletAddress;
 
+      // BK Ok - Log event
       WalletAddressUpdated(_walletAddress);
 
+      // BK Ok
       return true;
    }
 
 
    // Allows the owner to set an optional limit on the amount of tokens that can be purchased
    // by a contributor. It can also be set to 0 to remove limit.
+   // BK Ok - Only owner can execute
    function setMaxTokensPerAccount(uint256 _maxTokens) external onlyOwner returns(bool) {
 
+      // BK Ok
       maxTokensPerAccount = _maxTokens;
 
+      // BK Ok - Log event
       MaxTokensPerAccountUpdated(_maxTokens);
 
+      // BK Ok
       return true;
    }
 
 
    // Allows the owner to specify the conversion rate for ETH -> tokens.
    // For example, passing 1,000,000 would mean that 1 ETH would purchase 1000 tokens.
+   // BK Ok - Only owner can execute
    function setTokensPerKEther(uint256 _tokensPerKEther) external onlyOwner returns(bool) {
+      // BK Ok
       require(_tokensPerKEther > 0);
 
+      // BK Ok
       tokensPerKEther = _tokensPerKEther;
 
+      // BK Ok - Log event
       TokensPerKEtherUpdated(_tokensPerKEther);
 
+      // BK Ok
       return true;
    }
 
