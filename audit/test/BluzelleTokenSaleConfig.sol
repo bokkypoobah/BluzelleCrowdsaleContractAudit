@@ -18,8 +18,8 @@ contract BluzelleTokenSaleConfig is BluzelleTokenConfig {
     // Time
     //
 
-    uint256 public constant STAGE1_STARTTIME      = 1510799883; // Thu 16 Nov 2017 02:38:03 UTC
-    uint256 public constant STAGE1_ENDTIME        = 1510799928; // Thu 16 Nov 2017 02:38:48 UTC
+    uint256 public constant STAGE1_STARTTIME      = 1510806626; // Thu 16 Nov 2017 04:30:26 UTC
+    uint256 public constant STAGE1_ENDTIME        = 1510806671; // Thu 16 Nov 2017 04:31:11 UTC
 
 
     //

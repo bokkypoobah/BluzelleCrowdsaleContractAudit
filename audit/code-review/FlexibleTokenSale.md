@@ -227,14 +227,19 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
    // Allows the owner to set a bonus to apply to all purchases.
    // For example, setting it to 12000 means that instead of receiving 200 tokens,
    // for a given price, contributors would receive 240 tokens.
+   // BK Ok - Only owner can execute
    function setBonus(uint256 _bonus) external onlyOwner returns(bool) {
+      // BK Next 2 Ok
       require(_bonus >= 10000);
       require(_bonus <= 20000);
 
+      // BK Ok
       bonus = _bonus;
 
+      // BK Ok - Log event
       BonusUpdated(_bonus);
 
+      // BK Ok
       return true;
    }
 
@@ -242,43 +247,61 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
    // Allows the owner to set a sale window which will allow the sale (aka buyTokens) to
    // receive contributions between _startTime and _endTime. Once _endTime is reached,
    // the sale contract will automatically stop accepting incoming contributions.
+   // BK Ok - Only owner can execute
    function setSaleWindow(uint256 _startTime, uint256 _endTime) external onlyOwner returns(bool) {
+      // BK Ok
       require(_startTime > 0);
+      // BK Ok
       require(_endTime > _startTime);
 
+      // BK Next 2 Ok
       startTime = _startTime;
       endTime   = _endTime;
 
+      // BK Ok - Log event
       SaleWindowUpdated(_startTime, _endTime);
 
+      // BK Ok
       return true;
    }
 
 
    // Allows the owner to suspend the sale until it is manually resumed at a later time.
+   // BK Ok - Only owner can execute
    function suspend() external onlyOwner returns(bool) {
+      // BK Ok
       if (suspended == true) {
+          // BK Ok
           return false;
       }
 
+      // BK Ok
       suspended = true;
 
+      // BK Ok - Log event
       SaleSuspended();
 
+      // BK Ok
       return true;
    }
 
 
    // Allows the owner to resume the sale.
+   // BK Ok - Only owner can execute
    function resume() external onlyOwner returns(bool) {
+      // BK Ok
       if (suspended == false) {
+          // BK Ok
           return false;
       }
 
+      // BK Ok
       suspended = false;
 
+      // BK Ok - Log event
       SaleResumed();
 
+      // BK Ok
       return true;
    }
 
@@ -288,23 +311,33 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
    //
 
    // Default payable function which can be used to purchase tokens.
+   // BK Ok - Anyone can contribute ETH
    function () payable public {
+      // BK Ok
       buyTokens(msg.sender);
    }
 
 
+   // BK Ok - Anyone can contribute ETH
    function buyTokens(address beneficiary) public payable returns (bool) {
+      // BK Ok
       require(!finalized);
+      // BK Ok
       require(!suspended);
+      // BK Ok
       require(currentTime() >= startTime);
+      // BK Ok
       require(currentTime() <= endTime);
+      // BK Ok
       require(msg.value >= contributionMin);
+      // BK Next 3 Ok
       require(beneficiary != address(0));
       require(beneficiary != address(this));
       require(beneficiary != address(token));
 
       // We don't want to allow the wallet collecting ETH to
       // directly be used to purchase tokens.
+      // BK Ok
       require(msg.sender != address(walletAddress));
 
       // Check how many tokens are still available for sale.
@@ -375,20 +408,29 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
 
 
    // Allows the owner to take back the tokens that are assigned to the sale contract.
+   // BK Ok - Only owner can execute
    function reclaimTokens() external onlyOwner returns (bool) {
+      // BK Ok
       uint256 tokens = token.balanceOf(address(this));
 
+      // BK Ok
       if (tokens == 0) {
+         // BK Ok
          return false;
       }
 
+      // BK Ok
       address tokenOwner = token.owner();
+      // BK Ok
       require(tokenOwner != address(0));
 
+      // BK Ok
       require(token.transfer(tokenOwner, tokens));
 
+      // BK Ok - Log event
       TokensReclaimed(tokens);
 
+      // BK Ok
       return true;
    }
 }
