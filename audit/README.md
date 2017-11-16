@@ -121,6 +121,7 @@ in [test/test1results.txt](test/test1results.txt) and the detailed output saved 
 
 * [x] Deploy Token Contract
 * [x] Deploy Sale Contract
+* [x] Whitelist addresses
 
 <br />
 

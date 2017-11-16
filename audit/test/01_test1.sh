@@ -35,10 +35,10 @@ if [ "$MODE" == "dev" ]; then
   STARTTIME=`echo "$CURRENTTIME" | bc`
 else
   # Start time 1m 10s in the future
-  STARTTIME=`echo "$CURRENTTIME+60*3+15" | bc`
+  STARTTIME=`echo "$CURRENTTIME+75" | bc`
 fi
 STARTTIME_S=`date -r $STARTTIME -u`
-ENDTIME=`echo "$CURRENTTIME+60*4+15" | bc`
+ENDTIME=`echo "$CURRENTTIME+60*2" | bc`
 ENDTIME_S=`date -r $ENDTIME -u`
 
 printf "MODE                 = '$MODE'\n" | tee $TEST1OUTPUT
@@ -65,14 +65,12 @@ printf "ENDTIME              = '$ENDTIME' '$ENDTIME_S'\n" | tee -a $TEST1OUTPUT
 `cp $CONTRACTSDIR/*.sol .`
 
 # --- Modify parameters ---
-#`perl -pi -e "s/timePassed \> months\(3\)/timePassed \> 0/" $DTHSOL`
-#`perl -pi -e "s/deadline \=  1499436000;.*$/deadline = $ENDTIME; \/\/ $ENDTIME_S/" $FUNFAIRSALETEMPSOL`
-#`perl -pi -e "s/\/\/\/ \@return total amount of tokens.*$/function overloadedTotalSupply() constant returns (uint256) \{ return totalSupply; \}/" $DAOCASINOICOTEMPSOL`
-#`perl -pi -e "s/BLOCKS_IN_DAY \= 5256;*$/BLOCKS_IN_DAY \= $BLOCKSINDAY;/" $DAOCASINOICOTEMPSOL`
+`perl -pi -e "s/STAGE1_STARTTIME      \= 1511870400;.*$/STAGE1_STARTTIME      \= $STARTTIME; \/\/ $STARTTIME_S/" BluzelleTokenSaleConfig.sol`
+`perl -pi -e "s/STAGE1_ENDTIME        \= 1512043200;.*$/STAGE1_ENDTIME        \= $ENDTIME; \/\/ $ENDTIME_S/" BluzelleTokenSaleConfig.sol`
 
-#DIFFS1=`diff $CONTRACTSDIR/$DTHSOL $DTHSOL`
-#echo "--- Differences $CONTRACTSDIR/$DTHSOL $DTHSOL ---" | tee -a $TEST1OUTPUT
-#echo "$DIFFS1" | tee -a $TEST1OUTPUT
+DIFFS1=`diff $CONTRACTSDIR/BluzelleTokenSaleConfig.sol BluzelleTokenSaleConfig.sol`
+echo "--- Differences $CONTRACTSDIR/BluzelleTokenSaleConfig.sol BluzelleTokenSaleConfig.sol ---" | tee -a $TEST1OUTPUT
+echo "$DIFFS1" | tee -a $TEST1OUTPUT
 
 solc_0.4.17 --version | tee -a $TEST1OUTPUT
 
@@ -156,6 +154,24 @@ while (txpool.status.pending > 0) {
 printBalances();
 failIfTxStatusError(saleTx, saleMessage);
 printSaleContractDetails();
+console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
+var whitelistMessage = "Whitelist";
+// -----------------------------------------------------------------------------
+console.log("RESULT: " + whitelistMessage);
+var whitelist_1Tx = sale.setWhitelistedStatus(account3, 1, {from: contractOwnerAccount, gas: 2000000, gasPrice: defaultGasPrice});
+var whitelist_2Tx = sale.setWhitelistedBatch([account4, account5], [1, 2], {from: contractOwnerAccount, gas: 2000000, gasPrice: defaultGasPrice});
+while (txpool.status.pending > 0) {
+}
+printTxData("whitelist_1Tx", whitelist_1Tx);
+printTxData("whitelist_2Tx", whitelist_2Tx);
+printBalances();
+failIfTxStatusError(whitelist_1Tx, whitelistMessage + " - ac3 stage 1");
+failIfTxStatusError(whitelist_2Tx, whitelistMessage + " - [ac4, ac5] stage [1, 2]");
+printSaleContractDetails();
+printTokenContractDetails();
 console.log("RESULT: ");
 
 

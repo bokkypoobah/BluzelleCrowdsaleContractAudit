@@ -11,9 +11,9 @@ var accountNames = {};
 addAccount(eth.accounts[0], "Account #0 - Miner");
 addAccount(eth.accounts[1], "Account #1 - Contract Owner");
 addAccount(eth.accounts[2], "Account #2 - Multisig");
-addAccount(eth.accounts[3], "Account #3");
-addAccount(eth.accounts[4], "Account #4");
-addAccount(eth.accounts[5], "Account #5");
+addAccount(eth.accounts[3], "Account #3 - Whitelist(1)");
+addAccount(eth.accounts[4], "Account #4 - Whitelist(1)");
+addAccount(eth.accounts[5], "Account #5 - Whitelist(2)");
 addAccount(eth.accounts[6], "Account #6");
 addAccount(eth.accounts[7], "Account #7");
 addAccount(eth.accounts[8], "Account #8");
@@ -414,8 +414,8 @@ function printTokenContractDetails() {
     console.log("RESULT: token.name=" + contract.name());
     console.log("RESULT: token.decimals=" + decimals);
     console.log("RESULT: token.totalSupply=" + contract.totalSupply().shift(-decimals));
-    console.log("RESULT: token.DECIMALSFACTOR=" + DECIMALSFACTOR);
-    console.log("RESULT: token.finalized=" + finalized);
+    console.log("RESULT: token.DECIMALSFACTOR=" + contract.DECIMALSFACTOR() + " " + contract.DECIMALSFACTOR().shift(-18));
+    console.log("RESULT: token.finalized=" + contract.finalized());
 
     var latestBlock = eth.blockNumber;
     var i;
