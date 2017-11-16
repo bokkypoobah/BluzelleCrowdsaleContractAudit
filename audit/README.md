@@ -150,8 +150,8 @@ in [test/test1results.txt](test/test1results.txt) and the detailed output saved 
   * [x] contract BluzelleTokenSaleConfig is BluzelleTokenConfig
 * [ ] [code-review/FlexibleTokenSale.md](code-review/FlexibleTokenSale.md)
   * [ ] contract FlexibleTokenSale is Finalizable, OpsManaged
-* [ ] [code-review/BluzelleTokenSale.md](code-review/BluzelleTokenSale.md)
-  * [ ] contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig
+* [x] [code-review/BluzelleTokenSale.md](code-review/BluzelleTokenSale.md)
+  * [x] contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig
 
 <br />
 
