@@ -275,6 +275,7 @@ function printSaleContractDetails() {
     console.log("RESULT: sale.token=" + contract.token());
     console.log("RESULT: sale.totalTokensSold=" + contract.totalTokensSold() + " " + contract.totalTokensSold().shift(-18));
     console.log("RESULT: sale.totalEtherCollected=" + contract.totalEtherCollected() + " " + contract.totalEtherCollected().shift(-18));
+    console.log("RESULT: sale.currentStage=" + contract.currentStage());
 
     var latestBlock = eth.blockNumber;
     var i;

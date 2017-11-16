@@ -10,16 +10,16 @@ DEPLOYMENTDATA       = 'deploymentData.txt'
 INCLUDEJS            = './include.js'
 TEST1OUTPUT          = 'test1output.txt'
 TEST1RESULTS         = 'test1results.txt'
-CURRENTTIME          = '1510797685' 'Thu 16 Nov 2017 02:01:25 UTC'
-STARTTIME            = '1510797880' 'Thu 16 Nov 2017 02:04:40 UTC'
-ENDTIME              = '1510797940' 'Thu 16 Nov 2017 02:05:40 UTC'
+CURRENTTIME          = '1510798059' 'Thu 16 Nov 2017 02:07:39 UTC'
+STARTTIME            = '1510798254' 'Thu 16 Nov 2017 02:10:54 UTC'
+ENDTIME              = '1510798314' 'Thu 16 Nov 2017 02:11:54 UTC'
 solc, the solidity compiler commandline interface
 Version: 0.4.17+commit.bdeb9e52.Darwin.appleclang
 Welcome to the Geth JavaScript console!
 
 instance: Geth/v1.7.2-stable-1db4ecdc/darwin-amd64/go1.9
 coinbase: 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e
-at block: 1951 (Thu, 16 Nov 2017 13:01:23 AEDT)
+at block: 2030 (Thu, 16 Nov 2017 13:07:31 AEDT)
  datadir: /Users/bok/Projects/BluzelleCrowdsaleContractAudit/audit/test/testchain
  modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
 
@@ -54,7 +54,7 @@ undefined
 > 
 RESULT:  # Account                                             EtherBalanceChange                          Token Name
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        6.000000000000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        3.000000000000000000           0.000000000000000000 Account #0 - Miner
 RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
 RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - Multisig
 RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3
@@ -106,10 +106,10 @@ undefined
 ... 
 undefined
 > 
-RESULT: tokenAddress=0xbf4db64f49b3da9812fc5f82abe5d405fbecceaf status=0x1 Success gas=4000000 gasUsed=1080807 costETH=0.001080807 costUSD=0.35814701559 @ ETH/USD=331.37 gasPrice=1 gwei block=1955 txIx=0 txId=0x5165168553ed489fa2638f36d037ac008368a8403f379947d4a0b854e57f607c @ 1510797709 Thu, 16 Nov 2017 02:01:49 UTC
+RESULT: tokenAddress=0xe7963e0ada5b8c83596b3076e719d6169e648dfb status=0x1 Success gas=4000000 gasUsed=1080807 costETH=0.001080807 costUSD=0.35814701559 @ ETH/USD=331.37 gasPrice=1 gwei block=2033 txIx=0 txId=0x9a6a6f9ca2b070f0ee1794560da86023076e0d88dddd247a2457b220a4263ba1 @ 1510798080 Thu, 16 Nov 2017 02:08:00 UTC
 RESULT:  # Account                                             EtherBalanceChange                          Token Name
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       12.001080807000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        9.001080807000000000           0.000000000000000000 Account #0 - Miner
 RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.001080807000000000   500000000.000000000000000000 Account #1 - Contract Owner
 RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - Multisig
 RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3
@@ -118,7 +118,7 @@ RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.00000000000000000
 RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
 RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
 RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
-RESULT:  9 0xbf4db64f49b3da9812fc5f82abe5d405fbecceaf        0.000000000000000000           0.000000000000000000 BluzelleToken
+RESULT:  9 0xe7963e0ada5b8c83596b3076e719d6169e648dfb        0.000000000000000000           0.000000000000000000 BluzelleToken
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 RESULT:                                                                             500000000.000000000000000000 Total Token Balances
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
@@ -128,7 +128,7 @@ undefined
 RESULT: PASS Deploy Token Contract
 1
 > 
-RESULT: tokenContractAddress=0xbf4db64f49b3da9812fc5f82abe5d405fbecceaf
+RESULT: tokenContractAddress=0xe7963e0ada5b8c83596b3076e719d6169e648dfb
 RESULT: token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 RESULT: token.proposedOwner=0x0000000000000000000000000000000000000000
 RESULT: token.opsAddress=0x0000000000000000000000000000000000000000
@@ -137,7 +137,7 @@ RESULT: token.name=Bluzelle Token
 RESULT: token.decimals=18
 RESULT: token.totalSupply=500000000
 ReferenceError: 'DECIMALSFACTOR' is not defined
-    at printTokenContractDetails (functions.js:416:51)
+    at printTokenContractDetails (functions.js:417:51)
     at <anonymous>:1:1
 
 > 
@@ -179,10 +179,10 @@ undefined
 ... 
 undefined
 > 
-RESULT: saleAddress=0xc462cabfce1f53cb1e441f9ebc0c453719d7ffb2 status=0x1 Success gas=4000000 gasUsed=2126299 costETH=0.002126299 costUSD=0.70459169963 @ ETH/USD=331.37 gasPrice=1 gwei block=1957 txIx=0 txId=0xe02c2eb645e9edc368bc8181571aa6bf2798339c5c324c31fb7ef7ff2c1831d7 @ 1510797713 Thu, 16 Nov 2017 02:01:53 UTC
+RESULT: saleAddress=0x145806eb099eacdb8a0554f019c725bc476d8110 status=0x1 Success gas=4000000 gasUsed=2126299 costETH=0.002126299 costUSD=0.70459169963 @ ETH/USD=331.37 gasPrice=1 gwei block=2035 txIx=0 txId=0x7f9c17bfee885d21de39dd82fabe46585e38c4b95c561f7e54dc7e7e09a4d73b @ 1510798085 Thu, 16 Nov 2017 02:08:05 UTC
 RESULT:  # Account                                             EtherBalanceChange                          Token Name
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       18.003207106000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       15.003207106000000000           0.000000000000000000 Account #0 - Miner
 RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.003207106000000000   500000000.000000000000000000 Account #1 - Contract Owner
 RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - Multisig
 RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3
@@ -191,8 +191,8 @@ RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.00000000000000000
 RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
 RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
 RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
-RESULT:  9 0xbf4db64f49b3da9812fc5f82abe5d405fbecceaf        0.000000000000000000           0.000000000000000000 BluzelleToken
-RESULT: 10 0xc462cabfce1f53cb1e441f9ebc0c453719d7ffb2        0.000000000000000000           0.000000000000000000 BluzelleTokenSale
+RESULT:  9 0xe7963e0ada5b8c83596b3076e719d6169e648dfb        0.000000000000000000           0.000000000000000000 BluzelleToken
+RESULT: 10 0x145806eb099eacdb8a0554f019c725bc476d8110        0.000000000000000000           0.000000000000000000 BluzelleTokenSale
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 RESULT:                                                                             500000000.000000000000000000 Total Token Balances
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
@@ -202,7 +202,7 @@ undefined
 RESULT: PASS Deploy Sale Contract
 1
 > 
-RESULT: saleContractAddress=0xc462cabfce1f53cb1e441f9ebc0c453719d7ffb2
+RESULT: saleContractAddress=0x145806eb099eacdb8a0554f019c725bc476d8110
 RESULT: sale.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 RESULT: sale.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 RESULT: sale.proposedOwner=0x0000000000000000000000000000000000000000
@@ -233,6 +233,7 @@ RESULT: sale.walletAddress=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 RESULT: sale.token=0x0000000000000000000000000000000000000000
 RESULT: sale.totalTokensSold=0 0
 RESULT: sale.totalEtherCollected=0 0
+RESULT: sale.currentStage=1
 undefined
 > 
 RESULT: 
