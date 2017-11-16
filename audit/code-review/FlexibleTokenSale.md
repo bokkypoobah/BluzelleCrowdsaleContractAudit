@@ -341,68 +341,96 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
       require(msg.sender != address(walletAddress));
 
       // Check how many tokens are still available for sale.
+      // BK Ok
       uint256 saleBalance = token.balanceOf(address(this));
+      // BK Ok
       require(saleBalance > 0);
 
       // Calculate how many tokens the contributor could purchase based on ETH received.
+      // BK Ok
       uint256 tokens = msg.value.mul(tokensPerKEther).mul(bonus).div(tokenConversionFactor);
+      // BK Ok
       require(tokens > 0);
 
+      // BK Ok
       uint256 cost = msg.value;
+      // BK Ok
       uint256 refund = 0;
 
       // Calculate what is the maximum amount of tokens that the contributor
       // should be allowed to purchase
+      // BK Ok
       uint256 maxTokens = saleBalance;
 
+      // BK Ok
       if (maxTokensPerAccount > 0) {
          // There is a maximum amount of tokens per account in place.
          // Check if the user already hit that limit.
+         // BK Ok
          uint256 userBalance = token.balanceOf(beneficiary);
+         // BK Ok
          require(userBalance < maxTokensPerAccount);
 
+         // BK Ok
          uint256 quotaBalance = maxTokensPerAccount.sub(userBalance);
 
+         // BK Ok
          if (quotaBalance < saleBalance) {
+            // BK Ok
             maxTokens = quotaBalance;
          }
       }
 
+      // BK Ok
       require(maxTokens > 0);
 
+      // BK Ok
       if (tokens > maxTokens) {
          // The contributor sent more ETH than allowed to purchase.
          // Limit the amount of tokens that they can purchase in this transaction.
+         // BK Ok
          tokens = maxTokens;
 
          // Calculate the actual cost for that new amount of tokens.
+         // BK Ok
          cost = tokens.mul(tokenConversionFactor).div(tokensPerKEther.mul(bonus));
 
+         // BK Ok
          if (msg.value > cost) {
             // If the contributor sent more ETH than needed to buy the tokens,
             // the balance should be refunded.
+            // BK Ok
             refund = msg.value.sub(cost);
          }
       }
 
       // This is the actual amount of ETH that can be sent to the wallet.
+      // BK Ok
       uint256 contribution = msg.value.sub(refund);
+      // BK Ok
       walletAddress.transfer(contribution);
 
       // Update our stats counters.
+      // BK Ok
       totalTokensSold     = totalTokensSold.add(tokens);
+      // BK Ok
       totalEtherCollected = totalEtherCollected.add(contribution);
 
       // Transfer tokens to the beneficiary.
+      // BK Ok
       require(token.transfer(beneficiary, tokens));
 
       // Issue a refund for the excess ETH, as needed.
+      // BK Ok
       if (refund > 0) {
+         // BK Ok
          msg.sender.transfer(refund);
       }
 
+      // BK Ok
       TokensPurchased(beneficiary, cost, tokens);
 
+      // BK OK
       return true;
    }
 

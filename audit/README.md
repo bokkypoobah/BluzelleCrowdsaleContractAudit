@@ -1,7 +1,5 @@
 # Bluzelle Crowdsale Contract Audit
 
-Status: Work in progress
-
 ## Summary
 
 [Bluzelle](https://bluzelle.com/) intends to run a crowdsale commencing in Nov 2017.
@@ -12,7 +10,7 @@ This audit has been conducted on Bluzelle's source code in commits
 [108639e](https://github.com/njmurarka/ico-solidity/commit/108639ea9fa9299c4324ae11f5bbfc480596730e) and
 [50f7efd](https://github.com/njmurarka/ico-solidity/commit/50f7efd4029bec6469449f9d388e7e729a1a892c).
 
-TODO: Check - No potential vulnerabilities have been identified in the crowdsale and token contract.
+No potential vulnerabilities have been identified in the crowdsale and token contract.
 
 <br />
 
@@ -23,6 +21,10 @@ TODO: Check - No potential vulnerabilities have been identified in the crowdsale
 <br />
 
 ### Crowdsale Contract
+
+The crowdsale contract receives ethers (ETH) from participants and generates BLZ tokens assigned to the participant's account. The contributed ETH
+used to purchase the tokens is immediately transferred to the crowdsale wallet. And excess ETH above the contribution limits is refunded to the
+participant's account.
 
 <br />
 
@@ -55,13 +57,15 @@ with the following notable features:
 
 ## Recommendations
 
+There are no recommendations to improve the crowdsale or the token contracts.
+
 <br />
 
 <hr />
 
 ## Potential Vulnerabilities
 
-TODO: Check - No potential vulnerabilities have been identified in the crowdsale and token contract.
+No potential vulnerabilities have been identified in the crowdsale and token contract.
 
 <br />
 
@@ -108,7 +112,8 @@ matches the audited source code, and that the deployment parameters are correctl
 
 ## Risks
 
-TODO
+* This crowdsale contract has a low risk of having the ETH hacked or stolen, as any contributions by participants are immediately transferred
+  to the crowdsale wallet
 
 <br />
 
@@ -153,8 +158,8 @@ in [test/test1results.txt](test/test1results.txt) and the detailed output saved 
   * [x] contract BluzelleToken is FinalizableToken, BluzelleTokenConfig
 * [x] [code-review/BluzelleTokenSaleConfig.md](code-review/BluzelleTokenSaleConfig.md)
   * [x] contract BluzelleTokenSaleConfig is BluzelleTokenConfig
-* [ ] [code-review/FlexibleTokenSale.md](code-review/FlexibleTokenSale.md)
-  * [ ] contract FlexibleTokenSale is Finalizable, OpsManaged
+* [x] [code-review/FlexibleTokenSale.md](code-review/FlexibleTokenSale.md)
+  * [x] contract FlexibleTokenSale is Finalizable, OpsManaged
 * [x] [code-review/BluzelleTokenSale.md](code-review/BluzelleTokenSale.md)
   * [x] contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig
 
@@ -175,4 +180,4 @@ The following was not review as it is only used for testing:
 
 <br />
 
-(c) BokkyPooBah / Bok Consulting Pty Ltd for Bluzelle - Nov 13 2017. The MIT Licence.
+(c) BokkyPooBah / Bok Consulting Pty Ltd for Bluzelle - Nov 16 2017. The MIT Licence.
