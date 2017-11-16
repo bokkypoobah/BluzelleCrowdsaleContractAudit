@@ -116,6 +116,12 @@ TODO
 
 ## Testing
 
+The following functions were tested using the script [test/01_test1.sh](test/01_test1.sh) with the summary results saved
+in [test/test1results.txt](test/test1results.txt) and the detailed output saved in [test/test1output.txt](test/test1output.txt):
+
+* [x] Deploy Token Contract
+* [x] Deploy Sale Contract
+
 <br />
 
 <hr />
