@@ -1,9 +1,9 @@
 // ----------------------------------------------------------------------------
-// deployLib.js - Library for deploying smart contracts to the blockchain.
-// Enuma Blockchain Framework
+// utils.js - Set of helpers used by the tools.
+// Enuma Blockchain Platform
 //
 // Copyright (c) 2017 Enuma Technologies.
-// http://www.enuma.io/
+// https://www.enuma.io/
 // ----------------------------------------------------------------------------
 
 const fs = require('fs')
@@ -11,7 +11,7 @@ const Web3 = require('web3')
 const Path = require('path')
 
 
-const projectRoot = '../'
+const projectRoot = Path.resolve('../')
 
 
 module.exports.buildWeb3 = async (url) => {
@@ -24,9 +24,7 @@ async function buildWeb3(url) {
 }
 
 
-module.exports.deployContract = async (name, args, options) => {
-   const web3 = await buildWeb3()
-
+module.exports.deployContract = async (web3, name, args, options) => {
    const abi = loadAbiByName(projectRoot, name)
    const bin = loadByteCodeByName(projectRoot, name)
 
@@ -98,6 +96,8 @@ async function deployContract(web3, name, abi, bytecode, args, options) {
          txid = value
       })
 
+   instance.setProvider(web3.currentProvider)
+
    const code = await web3.eth.getCode(instance.options.address)
 
    if (code.length <= 2) {
@@ -114,5 +114,26 @@ async function deployContract(web3, name, abi, bytecode, args, options) {
    }
 }
 
+
+module.exports.findConfigFilePath = (folderPath) => {
+   return findConfigFilePath(folderPath)
+}
+
+
+function findConfigFilePath(folderPath) {
+   const filePath = Path.join(folderPath, "config.json")
+
+   if (fs.existsSync(filePath)) {
+      return filePath
+   }
+
+   const parentFolderPath = Path.dirname(folderPath)
+
+   if (folderPath == '/' || parentFolderPath == folderPath) {
+      return null
+   }
+
+   return findConfigFilePath(parentFolderPath)
+}
 
 

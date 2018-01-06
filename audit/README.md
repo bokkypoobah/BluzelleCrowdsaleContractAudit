@@ -7,10 +7,11 @@
 Bok Consulting Pty Ltd was commissioned to perform an audit on the Bluzelle's crowdsale and token Ethereum smart contract.
 
 This audit has been conducted on Bluzelle's source code in commits
-[108639e](https://github.com/njmurarka/ico-solidity/commit/108639ea9fa9299c4324ae11f5bbfc480596730e) and
-[50f7efd](https://github.com/njmurarka/ico-solidity/commit/50f7efd4029bec6469449f9d388e7e729a1a892c).
+[108639e](https://github.com/njmurarka/ico-solidity/commit/108639ea9fa9299c4324ae11f5bbfc480596730e),
+[50f7efd](https://github.com/njmurarka/ico-solidity/commit/50f7efd4029bec6469449f9d388e7e729a1a892c) and
+[542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23).
 
-No potential vulnerabilities have been identified in the crowdsale and token contract.
+TODO - Check changes - No potential vulnerabilities have been identified in the crowdsale and token contract?
 
 <br />
 
@@ -65,7 +66,7 @@ There are no recommendations to improve the crowdsale or the token contracts.
 
 ## Potential Vulnerabilities
 
-No potential vulnerabilities have been identified in the crowdsale and token contract.
+TODO - Check changes - No potential vulnerabilities have been identified in the crowdsale and token contract?
 
 <br />
 
