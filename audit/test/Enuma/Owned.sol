@@ -1,11 +1,11 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.18;
 
 // ----------------------------------------------------------------------------
 // Owned - Ownership model with 2 phase transfers
-// Enuma Blockchain Framework
+// Enuma Blockchain Platform
 //
 // Copyright (c) 2017 Enuma Technologies.
-// http://www.enuma.io/
+// https://www.enuma.io/
 // ----------------------------------------------------------------------------
 
 
@@ -17,6 +17,7 @@ contract Owned {
 
    event OwnershipTransferInitiated(address indexed _proposedOwner);
    event OwnershipTransferCompleted(address indexed _newOwner);
+   event OwnershipTransferCanceled();
 
 
    function Owned() public
@@ -44,6 +45,19 @@ contract Owned {
       proposedOwner = _proposedOwner;
 
       OwnershipTransferInitiated(proposedOwner);
+
+      return true;
+   }
+
+
+   function cancelOwnershipTransfer() public onlyOwner returns (bool) {
+      if (proposedOwner == address(0)) {
+         return true;
+      }
+
+      proposedOwner = address(0);
+
+      OwnershipTransferCanceled();
 
       return true;
    }

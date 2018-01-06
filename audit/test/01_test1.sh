@@ -62,7 +62,7 @@ printf "STARTTIME            = '$STARTTIME' '$STARTTIME_S'\n" | tee -a $TEST1OUT
 printf "ENDTIME              = '$ENDTIME' '$ENDTIME_S'\n" | tee -a $TEST1OUTPUT
 
 # Make copy of SOL file and modify start and end times ---
-`cp $CONTRACTSDIR/*.sol .`
+`cp -rp $CONTRACTSDIR/* .`
 
 # --- Modify parameters ---
 `perl -pi -e "s/STAGE1_STARTTIME      \= 1511870400;.*$/STAGE1_STARTTIME      \= $STARTTIME; \/\/ $STARTTIME_S/" BluzelleTokenSaleConfig.sol`

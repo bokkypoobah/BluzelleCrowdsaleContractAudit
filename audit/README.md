@@ -159,17 +159,20 @@ in [test/test1results.txt](test/test1results.txt) and the detailed output saved 
   * [x] contract FinalizableToken is ERC20Token, OpsManaged, Finalizable
 * [ ] [code-review/FlexibleTokenSale.md](code-review/FlexibleTokenSale.md)
   * [ ] contract FlexibleTokenSale is Finalizable, OpsManaged
+    * [ ] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
 
 <br />
 
 ### contracts
 
-* [ ] [code-review/BluzelleTokenConfig.md](code-review/BluzelleTokenConfig.md)
-  * [ ] contract BluzelleTokenConfig
+* [x] [code-review/BluzelleTokenConfig.md](code-review/BluzelleTokenConfig.md)
+  * [x] contract BluzelleTokenConfig
 * [ ] [code-review/BluzelleToken.md](code-review/BluzelleToken.md)
   * [ ] contract BluzelleToken is FinalizableToken, BluzelleTokenConfig
+    * [ ] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
 * [ ] [code-review/BluzelleTokenSaleConfig.md](code-review/BluzelleTokenSaleConfig.md)
   * [ ] contract BluzelleTokenSaleConfig is BluzelleTokenConfig
+    * [ ] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
 * [ ] [code-review/BluzelleTokenSale.md](code-review/BluzelleTokenSale.md)
   * [ ] contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig
 

@@ -1,11 +1,11 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.18;
 
 // ----------------------------------------------------------------------------
 // FinalizableToken - Extension to ERC20Token with ops and finalization
-// Enuma Blockchain Framework
+// Enuma Blockchain Platform
 //
 // Copyright (c) 2017 Enuma Technologies.
-// http://www.enuma.io/
+// https://www.enuma.io/
 // ----------------------------------------------------------------------------
 
 import "./ERC20Token.sol";
@@ -48,6 +48,8 @@ contract FinalizableToken is ERC20Token, OpsManaged, Finalizable {
 
 
    function validateTransfer(address _sender, address _to) private view {
+      require(_to != address(0));
+
       // Once the token is finalized, everybody can transfer tokens.
       if (finalized) {
          return;
