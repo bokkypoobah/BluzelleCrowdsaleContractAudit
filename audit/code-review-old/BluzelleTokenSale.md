@@ -7,7 +7,8 @@ Source file [../../contracts/BluzelleTokenSale.sol](../../contracts/BluzelleToke
 <hr />
 
 ```javascript
-pragma solidity ^0.4.18;
+// BK Ok
+pragma solidity ^0.4.17;
 
 // ----------------------------------------------------------------------------
 // BluzelleTokenSale - Token Sale Contract
@@ -18,10 +19,12 @@ pragma solidity ^0.4.18;
 // The MIT Licence.
 // ----------------------------------------------------------------------------
 
-import "./Enuma/FlexibleTokenSale.sol";
+// BK Next 2 Ok
+import "./FlexibleTokenSale.sol";
 import "./BluzelleTokenSaleConfig.sol";
 
 
+// BK Ok
 contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig {
 
    //
@@ -31,34 +34,31 @@ contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig {
    // This is the stage or whitelist group that is currently in effect.
    // Everybody that's been whitelisted for earlier stages should be able to
    // contribute in the current stage.
+   // BK Ok
    uint256 public currentStage;
-
-   // Keeps track of the amount of bonus to apply for a given stage. If set
-   // to 0, the base class bonus will be used.
-   mapping(uint256 => uint256) public stageBonus;
-
-   // Keeps track of the amount of tokens that a specific account has received.
-   mapping(address => uint256) public accountTokensPurchased;
 
    // This a mapping of address -> stage that they are allowed to participate in.
    // For example, if someone has been whitelisted for stage 2, they will be able
    // to participate for stages 2 and above but they would not be able to participate
    // in stage 1. A stage value of 0 means that the participant is not whitelisted.
+   // BK Ok
    mapping(address => uint256) public whitelist;
 
 
    //
    // Events
    //
+   // BK Next 2 Ok - Events
    event CurrentStageUpdated(uint256 _newStage);
-   event StageBonusUpdated(uint256 _stage, uint256 _bonus);
    event WhitelistedStatusUpdated(address indexed _address, uint256 _stage);
 
 
+   // BK Ok - Constructor
    function BluzelleTokenSale(address wallet) public
-      FlexibleTokenSale(INITIAL_STARTTIME, INITIAL_ENDTIME, wallet)
+      FlexibleTokenSale(STAGE1_STARTTIME, STAGE1_ENDTIME, wallet)
    {
-      currentStage        = INITIAL_STAGE;
+      // BK Next 5 Ok
+      currentStage        = 1;
       tokensPerKEther     = TOKENS_PER_KETHER;
       bonus               = BONUS;
       maxTokensPerAccount = TOKENS_ACCOUNT_MAX;
@@ -68,54 +68,50 @@ contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig {
 
    // Allows the admin to determine what is the current stage for
    // the sale. It can only move forward.
+   // BK Ok - Only owner can execute
    function setCurrentStage(uint256 _stage) public onlyOwner returns(bool) {
-      require(_stage > 0);
+      // BK Ok
+      require(_stage >= currentStage);
 
+      // BK Ok
       if (currentStage == _stage) {
+         // BK Ok
          return false;
       }
 
+      // BK Ok
       currentStage = _stage;
 
+      // BK Ok - Log event
       CurrentStageUpdated(_stage);
 
-      return true;
-   }
-
-
-   // Allows the admin to set a bonus amount to apply for a specific stage.
-   function setStageBonus(uint256 _stage, uint256 _bonus) public onlyOwner returns(bool) {
-      require(_stage > 0);
-      require(_bonus <= 10000);
-
-      if (stageBonus[_stage] == _bonus) {
-         // Nothing to change.
-         return false;
-      }
-
-      stageBonus[_stage] = _bonus;
-
-      StageBonusUpdated(_stage, _bonus);
-
+      // BK Ok
       return true;
    }
 
 
    // Allows the owner or ops to add/remove people from the whitelist.
+   // BK Ok - Only owner or ops can execute
    function setWhitelistedStatus(address _address, uint256 _stage) public onlyOwnerOrOps returns (bool) {
+      // BK Ok
       return setWhitelistedStatusInternal(_address, _stage);
    }
 
 
+   // BK Ok - Private function
    function setWhitelistedStatusInternal(address _address, uint256 _stage) private returns (bool) {
+      // BK Next 3 Ok
       require(_address != address(0));
       require(_address != address(this));
       require(_address != walletAddress);
 
+      // BK Ok
       whitelist[_address] = _stage;
 
+      // BK Ok - Log event
       WhitelistedStatusUpdated(_address, _stage);
 
+      // BK Ok
       return true;
    }
 
@@ -123,13 +119,20 @@ contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig {
    // Allows the owner or ops to add/remove people from the whitelist, in batches. This makes
    // it easier/cheaper/faster to upload whitelist data in bulk. Note that the function is using an
    // unbounded loop so the call should take care to not exceed the tx gas limit or block gas limit.
-   function setWhitelistedBatch(address[] _addresses, uint256 _stage) public onlyOwnerOrOps returns (bool) {
+   // BK Ok - Only owner or ops can execute
+   function setWhitelistedBatch(address[] _addresses, uint256[] _stages) public onlyOwnerOrOps returns (bool) {
+      // BK Ok
       require(_addresses.length > 0);
+      // BK Ok
+      require(_addresses.length == _stages.length);
 
+      // BK Ok
       for (uint256 i = 0; i < _addresses.length; i++) {
-         require(setWhitelistedStatusInternal(_addresses[i], _stage));
+         // BK Ok
+         require(setWhitelistedStatusInternal(_addresses[i], _stages[i]));
       }
 
+      // BK Ok
       return true;
    }
 
@@ -137,33 +140,17 @@ contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig {
    // This is an extension to the buyToken function in FlexibleTokenSale which also takes
    // care of checking contributors against the whitelist. Since buyTokens supports proxy payments
    // we check that both the sender and the beneficiary have been whitelisted.
-   function buyTokensInternal(address _beneficiary, uint256 _bonus) internal returns (uint256) {
+   // BK Ok - Anyone can call, with ETH
+   function buyTokens(address beneficiary) public payable returns (bool) {
+      // BK Next 2 Ok
       require(whitelist[msg.sender] > 0);
-      require(whitelist[_beneficiary] > 0);
+      require(whitelist[beneficiary] > 0);
+      // BK Next 2 Ok
       require(currentStage >= whitelist[msg.sender]);
+      require(currentStage >= whitelist[beneficiary]);
 
-      uint256 _beneficiaryStage = whitelist[_beneficiary];
-      require(currentStage >= _beneficiaryStage);
-
-      uint256 applicableBonus = stageBonus[_beneficiaryStage];
-      if (applicableBonus == 0) {
-         applicableBonus = _bonus;
-      }
-
-      uint256 tokensPurchased = super.buyTokensInternal(_beneficiary, applicableBonus);
-
-      accountTokensPurchased[_beneficiary] = accountTokensPurchased[_beneficiary].add(tokensPurchased);
-
-      return tokensPurchased;
-   }
-
-
-   // Returns the number of tokens that the user has purchased. We keep a separate balance from
-   // the token contract in case we'd like to do additional sales with new purchase limits. This behavior
-   // is different from the base implementation which just checks the token balance from the token
-   // contract directly.
-   function getUserTokenBalance(address _beneficiary) internal view returns (uint256) {
-      return accountTokensPurchased[_beneficiary];
+      // BK Ok
+      return super.buyTokens(beneficiary);
    }
 }
 

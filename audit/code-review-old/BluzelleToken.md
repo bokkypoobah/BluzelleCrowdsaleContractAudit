@@ -7,7 +7,8 @@ Source file [../../contracts/BluzelleToken.sol](../../contracts/BluzelleToken.so
 <hr />
 
 ```javascript
-pragma solidity ^0.4.18;
+// BK Ok
+pragma solidity ^0.4.17;
 
 // ----------------------------------------------------------------------------
 // BluzelleToken - ERC20 Compatible Token
@@ -18,7 +19,8 @@ pragma solidity ^0.4.18;
 // The MIT Licence.
 // ----------------------------------------------------------------------------
 
-import "./Enuma/FinalizableToken.sol";
+// BK Next 2 Ok
+import "./FinalizableToken.sol";
 import "./BluzelleTokenConfig.sol";
 
 
@@ -34,34 +36,13 @@ import "./BluzelleTokenConfig.sol";
 // In addition to owner, there is a ops role which is used during the sale,
 // by the sale contract, in order to transfer tokens.
 // ----------------------------------------------------------------------------
+// BK Ok
 contract BluzelleToken is FinalizableToken, BluzelleTokenConfig {
 
-
-   event TokensReclaimed(uint256 _amount);
-
-
+   // BK Ok - Constructor
    function BluzelleToken() public
       FinalizableToken(TOKEN_NAME, TOKEN_SYMBOL, TOKEN_DECIMALS, TOKEN_TOTALSUPPLY)
    {
-   }
-
-
-   // Allows the owner to reclaim tokens that have been sent to the token address itself.
-   function reclaimTokens() public onlyOwner returns (bool) {
-
-      address account = address(this);
-      uint256 amount  = balanceOf(account);
-
-      if (amount == 0) {
-         return true;
-      }
-
-      balances[account] = balances[account].sub(amount);
-      balances[owner] = balances[owner].add(amount);
-
-      TokensReclaimed(amount);
-
-      return true;
    }
 }
 
