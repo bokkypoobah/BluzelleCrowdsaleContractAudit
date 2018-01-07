@@ -157,9 +157,9 @@ in [test/test1results.txt](test/test1results.txt) and the detailed output saved 
     * [x] Small functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
 * [x] [code-review/FinalizableToken.md](code-review/FinalizableToken.md)
   * [x] contract FinalizableToken is ERC20Token, OpsManaged, Finalizable
-* [ ] [code-review/FlexibleTokenSale.md](code-review/FlexibleTokenSale.md)
-  * [ ] contract FlexibleTokenSale is Finalizable, OpsManaged
-    * [ ] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
+* [x] [code-review/FlexibleTokenSale.md](code-review/FlexibleTokenSale.md)
+  * [x] contract FlexibleTokenSale is Finalizable, OpsManaged
+    * [x] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
 
 <br />
 
