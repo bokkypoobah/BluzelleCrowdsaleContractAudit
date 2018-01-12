@@ -40,6 +40,8 @@ with the following notable features:
 
 <br />
 
+<hr />
+
 ## Table Of Contents
 
 * [Summary](#summary)
@@ -58,7 +60,8 @@ with the following notable features:
 
 ## Recommendations
 
-There are no recommendations to improve the crowdsale or the token contracts.
+* [ ] **LOW IMPORTANCE** `BluzelleToken.reclaimTokens()` should emit a `Transfer(...)` event as this is picked up by blockchain
+  token explorers
 
 <br />
 
@@ -167,9 +170,9 @@ in [test/test1results.txt](test/test1results.txt) and the detailed output saved 
 
 * [x] [code-review/BluzelleTokenConfig.md](code-review/BluzelleTokenConfig.md)
   * [x] contract BluzelleTokenConfig
-* [ ] [code-review/BluzelleToken.md](code-review/BluzelleToken.md)
-  * [ ] contract BluzelleToken is FinalizableToken, BluzelleTokenConfig
-    * [ ] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
+* [x] [code-review/BluzelleToken.md](code-review/BluzelleToken.md)
+  * [x] contract BluzelleToken is FinalizableToken, BluzelleTokenConfig
+    * [x] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
 * [ ] [code-review/BluzelleTokenSaleConfig.md](code-review/BluzelleTokenSaleConfig.md)
   * [ ] contract BluzelleTokenSaleConfig is BluzelleTokenConfig
     * [ ] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
