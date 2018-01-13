@@ -8,8 +8,9 @@ Bok Consulting Pty Ltd was commissioned to perform an audit on the Bluzelle's cr
 
 This audit has been conducted on Bluzelle's source code in commits
 [108639e](https://github.com/njmurarka/ico-solidity/commit/108639ea9fa9299c4324ae11f5bbfc480596730e),
-[50f7efd](https://github.com/njmurarka/ico-solidity/commit/50f7efd4029bec6469449f9d388e7e729a1a892c) and
-[542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23).
+[50f7efd](https://github.com/njmurarka/ico-solidity/commit/50f7efd4029bec6469449f9d388e7e729a1a892c),
+[542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23) and
+[01df595](https://github.com/njmurarka/ico-solidity/commit/01df595e1204e321a23331941b853e4a85e00ef9).
 
 TODO - Check changes - No potential vulnerabilities have been identified in the crowdsale and token contract?
 
@@ -60,8 +61,9 @@ with the following notable features:
 
 ## Recommendations
 
-* [ ] **LOW IMPORTANCE** `BluzelleToken.reclaimTokens()` should emit a `Transfer(...)` event as this is picked up by blockchain
+* [x] **LOW IMPORTANCE** `BluzelleToken.reclaimTokens()` should emit a `Transfer(...)` event as this is picked up by blockchain
   token explorers
+  [x] `Transfer(...)` event added in [01df595](https://github.com/njmurarka/ico-solidity/commit/01df595e1204e321a23331941b853e4a85e00ef9)
 
 <br />
 
@@ -173,11 +175,12 @@ in [test/test1results.txt](test/test1results.txt) and the detailed output saved 
 * [x] [code-review/BluzelleToken.md](code-review/BluzelleToken.md)
   * [x] contract BluzelleToken is FinalizableToken, BluzelleTokenConfig
     * [x] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
-* [ ] [code-review/BluzelleTokenSaleConfig.md](code-review/BluzelleTokenSaleConfig.md)
-  * [ ] contract BluzelleTokenSaleConfig is BluzelleTokenConfig
-    * [ ] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
-* [ ] [code-review/BluzelleTokenSale.md](code-review/BluzelleTokenSale.md)
-  * [ ] contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig
+    * [x] `Transfer(...)` event added in [01df595](https://github.com/njmurarka/ico-solidity/commit/01df595e1204e321a23331941b853e4a85e00ef9)
+* [x] [code-review/BluzelleTokenSaleConfig.md](code-review/BluzelleTokenSaleConfig.md)
+  * [x] contract BluzelleTokenSaleConfig is BluzelleTokenConfig
+    * [x] Functional update in [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23)
+* [x] [code-review/BluzelleTokenSale.md](code-review/BluzelleTokenSale.md)
+  * [x] contract BluzelleTokenSale is FlexibleTokenSale, BluzelleTokenSaleConfig
 
 <br />
 

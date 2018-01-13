@@ -63,7 +63,7 @@ contract BluzelleToken is FinalizableToken, BluzelleTokenConfig {
       // BK Ok
       if (amount == 0) {
          // BK Ok
-         return true;
+         return false;
       }
 
       // BK Ok
@@ -71,7 +71,9 @@ contract BluzelleToken is FinalizableToken, BluzelleTokenConfig {
       // BK Ok
       balances[owner] = balances[owner].add(amount);
 
-      // BK NOTE - The `Transfer(...)` event should be emitted here as blockchain explorers will pick it up
+      // BK Ok
+      Transfer(account, owner, amount);
+
       // BK Ok
       TokensReclaimed(amount);
 

@@ -422,6 +422,7 @@ contract FlexibleTokenSale is Finalizable, OpsManaged {
       // Issue a refund for the excess ETH, as needed.
       // BK Ok
       if (refund > 0) {
+         // BK Ok
          msg.sender.transfer(refund);
       }
 

@@ -385,6 +385,13 @@ function printSaleContractDetails() {
     });
     currentStageUpdatedEvents.stopWatching();
 
+    var stageBonusUpdatedEvents = contract.StageBonusUpdated({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
+    i = 0;
+    stageBonusUpdatedEvents.watch(function (error, result) {
+      console.log("RESULT: StageBonusUpdated " + i++ + " #" + result.blockNumber + ": " + JSON.stringify(result.args));
+    });
+    stageBonusUpdatedEvents.stopWatching();
+
     var whitelistedStatusUpdatedEvents = contract.WhitelistedStatusUpdated({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
     i = 0;
     whitelistedStatusUpdatedEvents.watch(function (error, result) {
