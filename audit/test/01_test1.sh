@@ -65,19 +65,18 @@ printf "ENDTIME              = '$ENDTIME' '$ENDTIME_S'\n" | tee -a $TEST1OUTPUT
 `cp -rp $CONTRACTSDIR/* .`
 
 # --- Modify parameters ---
-`perl -pi -e "s/STAGE1_STARTTIME      \= 1511870400;.*$/STAGE1_STARTTIME      \= $STARTTIME; \/\/ $STARTTIME_S/" BluzelleTokenSaleConfig.sol`
-`perl -pi -e "s/STAGE1_ENDTIME        \= 1512043200;.*$/STAGE1_ENDTIME        \= $ENDTIME; \/\/ $ENDTIME_S/" BluzelleTokenSaleConfig.sol`
+`perl -pi -e "s/INITIAL_STARTTIME      \= 1511870400;.*$/INITIAL_STARTTIME      \= $STARTTIME; \/\/ $STARTTIME_S/" BluzelleTokenSaleConfig.sol`
+`perl -pi -e "s/INITIAL_ENDTIME        \= 1512043200;.*$/INITIAL_ENDTIME        \= $ENDTIME; \/\/ $ENDTIME_S/" BluzelleTokenSaleConfig.sol`
 
 DIFFS1=`diff $CONTRACTSDIR/BluzelleTokenSaleConfig.sol BluzelleTokenSaleConfig.sol`
 echo "--- Differences $CONTRACTSDIR/BluzelleTokenSaleConfig.sol BluzelleTokenSaleConfig.sol ---" | tee -a $TEST1OUTPUT
 echo "$DIFFS1" | tee -a $TEST1OUTPUT
 
-solc_0.4.17 --version | tee -a $TEST1OUTPUT
+solc_0.4.18 --version | tee -a $TEST1OUTPUT
 
-echo "var tokenOutput=`solc_0.4.17 --optimize --combined-json abi,bin,interface $TOKENSOL`;" > $TOKENJS
+echo "var tokenOutput=`solc_0.4.18 --optimize --pretty-json --combined-json abi,bin,interface $TOKENSOL`;" > $TOKENJS
 
-echo "var saleOutput=`solc_0.4.17 --optimize --combined-json abi,bin,interface $SALESOL`;" > $SALEJS
-
+echo "var saleOutput=`solc_0.4.18 --optimize --pretty-json --combined-json abi,bin,interface $SALESOL`;" > $SALEJS
 
 geth --verbosity 3 attach $GETHATTACHPOINT << EOF | tee -a $TEST1OUTPUT
 loadScript("$TOKENJS");
@@ -162,7 +161,7 @@ var initialiseSaleMessage = "Initialise Sale";
 // -----------------------------------------------------------------------------
 console.log("RESULT: " + initialiseSaleMessage);
 var initialiseSale_1Tx = sale.initialize(tokenAddress, {from: contractOwnerAccount, gas: 2000000, gasPrice: defaultGasPrice});
-var initialiseSale_2Tx = token.transfer(saleAddress, sale.TOKENS_SALE(), {from: contractOwnerAccount, gas: 2000000, gasPrice: defaultGasPrice});
+var initialiseSale_2Tx = token.transfer(saleAddress, token.TOKEN_TOTALSUPPLY(), {from: contractOwnerAccount, gas: 2000000, gasPrice: defaultGasPrice});
 var initialiseSale_3Tx = token.setOpsAddress(saleAddress, {from: contractOwnerAccount, gas: 2000000, gasPrice: defaultGasPrice});
 while (txpool.status.pending > 0) {
 }
@@ -183,20 +182,23 @@ var whitelistMessage = "Whitelist";
 // -----------------------------------------------------------------------------
 console.log("RESULT: " + whitelistMessage);
 var whitelist_1Tx = sale.setWhitelistedStatus(account3, 1, {from: contractOwnerAccount, gas: 2000000, gasPrice: defaultGasPrice});
-var whitelist_2Tx = sale.setWhitelistedBatch([account4, account5], [1, 2], {from: contractOwnerAccount, gas: 2000000, gasPrice: defaultGasPrice});
+var whitelist_2Tx = sale.setWhitelistedBatch([account4], 1, {from: contractOwnerAccount, gas: 2000000, gasPrice: defaultGasPrice});
+var whitelist_3Tx = sale.setWhitelistedBatch([account5], 2, {from: contractOwnerAccount, gas: 2000000, gasPrice: defaultGasPrice});
 while (txpool.status.pending > 0) {
 }
 printTxData("whitelist_1Tx", whitelist_1Tx);
 printTxData("whitelist_2Tx", whitelist_2Tx);
+printTxData("whitelist_3Tx", whitelist_3Tx);
 printBalances();
 failIfTxStatusError(whitelist_1Tx, whitelistMessage + " - ac3 stage 1");
-failIfTxStatusError(whitelist_2Tx, whitelistMessage + " - [ac4, ac5] stage [1, 2]");
+failIfTxStatusError(whitelist_2Tx, whitelistMessage + " - [ac4] stage 1");
+failIfTxStatusError(whitelist_3Tx, whitelistMessage + " - [ac5] stage 2");
 printSaleContractDetails();
 printTokenContractDetails();
 console.log("RESULT: ");
 
 
-waitUntil("startTime", startTime, 0);
+waitUntil("sale.startTime()", sale.startTime(), 0);
 
 
 // -----------------------------------------------------------------------------

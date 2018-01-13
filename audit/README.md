@@ -2,7 +2,7 @@
 
 ## Summary
 
-[Bluzelle](https://bluzelle.com/) intends to run a crowdsale commencing in Nov 2017.
+[Bluzelle](https://bluzelle.com/) intends to run a crowdsale commencing in Jan 2018.
 
 Bok Consulting Pty Ltd was commissioned to perform an audit on the Bluzelle's crowdsale and token Ethereum smart contract.
 
@@ -12,7 +12,7 @@ This audit has been conducted on Bluzelle's source code in commits
 [542b5ca](https://github.com/njmurarka/ico-solidity/commit/542b5ca38d7cfc2292e1bb135b8ee10679e54d23) and
 [01df595](https://github.com/njmurarka/ico-solidity/commit/01df595e1204e321a23331941b853e4a85e00ef9).
 
-TODO - Check changes - No potential vulnerabilities have been identified in the crowdsale and token contract?
+No potential vulnerabilities have been identified in the crowdsale and token contract.
 
 <br />
 
@@ -71,7 +71,7 @@ with the following notable features:
 
 ## Potential Vulnerabilities
 
-TODO - Check changes - No potential vulnerabilities have been identified in the crowdsale and token contract?
+No potential vulnerabilities have been identified in the crowdsale and token contract.
 
 <br />
 
@@ -199,4 +199,4 @@ The following was not review as it is only used for testing:
 
 <br />
 
-(c) BokkyPooBah / Bok Consulting Pty Ltd for Bluzelle - Dec 7 2017. The MIT Licence.
+(c) BokkyPooBah / Bok Consulting Pty Ltd for Bluzelle - Jan 14 2018. The MIT Licence.

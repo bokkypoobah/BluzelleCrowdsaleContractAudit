@@ -1,6 +1,6 @@
-// Nov 16 2017
-var ethPriceUSD = 331.37;
-var defaultGasPrice = web3.toWei(1, "gwei");
+// Jan 13 2018
+var ethPriceUSD = 1324.89;
+var defaultGasPrice = web3.toWei(20, "gwei");
 
 // -----------------------------------------------------------------------------
 // Accounts
@@ -246,18 +246,12 @@ function printSaleContractDetails() {
   if (saleContractAddress != null && saleContractAbi != null) {
     var contract = eth.contract(saleContractAbi).at(saleContractAddress);
     console.log("RESULT: sale.owner=" + contract.owner());
-    console.log("RESULT: sale.owner=" + contract.owner());
     console.log("RESULT: sale.proposedOwner=" + contract.proposedOwner());
     console.log("RESULT: sale.opsAddress=" + contract.opsAddress());
     console.log("RESULT: sale.finalized=" + contract.finalized());
-    console.log("RESULT: sale.STAGE1_STARTTIME=" + contract.STAGE1_STARTTIME() + " " + new Date(contract.STAGE1_STARTTIME() * 1000).toUTCString());
-    console.log("RESULT: sale.STAGE1_ENDTIME=" + contract.STAGE1_ENDTIME() + " " + new Date(contract.STAGE1_ENDTIME() * 1000).toUTCString());
+    console.log("RESULT: sale.INITIAL_STARTTIME=" + contract.INITIAL_STARTTIME() + " " + new Date(contract.INITIAL_STARTTIME() * 1000).toUTCString());
+    console.log("RESULT: sale.INITIAL_ENDTIME=" + contract.INITIAL_ENDTIME() + " " + new Date(contract.INITIAL_ENDTIME() * 1000).toUTCString());
     console.log("RESULT: sale.DECIMALSFACTOR=" + contract.DECIMALSFACTOR() + " " + contract.DECIMALSFACTOR().shift(-18));
-    console.log("RESULT: sale.TOKENS_TOTAL=" + contract.TOKENS_TOTAL() + " " + contract.TOKENS_TOTAL().shift(-18));
-    console.log("RESULT: sale.TOKENS_SALE=" + contract.TOKENS_SALE() + " " + contract.TOKENS_SALE().shift(-18));
-    console.log("RESULT: sale.TOKENS_FOUNDERS=" + contract.TOKENS_FOUNDERS() + " " + contract.TOKENS_FOUNDERS().shift(-18));
-    console.log("RESULT: sale.TOKENS_PARTNERS=" + contract.TOKENS_PARTNERS() + " " + contract.TOKENS_PARTNERS().shift(-18));
-    console.log("RESULT: sale.TOKENS_FUTURE=" + contract.TOKENS_FUTURE() + " " + contract.TOKENS_FUTURE().shift(-18));
     console.log("RESULT: sale.CONTRIBUTION_MIN=" + contract.CONTRIBUTION_MIN() + " " + contract.CONTRIBUTION_MIN().shift(-18));
     console.log("RESULT: sale.TOKENS_PER_KETHER=" + contract.TOKENS_PER_KETHER());
     console.log("RESULT: sale.BONUS=" + contract.BONUS());
@@ -421,6 +415,7 @@ function printTokenContractDetails() {
     console.log("RESULT: token.name=" + contract.name());
     console.log("RESULT: token.decimals=" + decimals);
     console.log("RESULT: token.totalSupply=" + contract.totalSupply().shift(-decimals));
+    console.log("RESULT: token.TOKEN_TOTALSUPPLY=" + contract.TOKEN_TOTALSUPPLY().shift(-decimals));
     console.log("RESULT: token.DECIMALSFACTOR=" + contract.DECIMALSFACTOR() + " " + contract.DECIMALSFACTOR().shift(-18));
     console.log("RESULT: token.finalized=" + contract.finalized());
 
